@@ -1,4 +1,5 @@
 import Vapor
+import MongoSwiftSync
 
 // configures your application
 public func configure(_ app: Application) throws {
@@ -6,5 +7,6 @@ public func configure(_ app: Application) throws {
     // app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
 
     // register routes
+    let mongo = try MongoClient("mongodb://localhost:27017")
     try routes(app)
 }

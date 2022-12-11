@@ -2,10 +2,12 @@ import Vapor
 
 func routes(_ app: Application) throws {
     app.get { req async in
-        "It works!"
+        "Hello 👋"
     }
 
-    app.get("hello") { req async -> String in
-        "Hello, world!"
+    // Return all items in the fridge
+    app.get("fridge") { req async -> String in
+        // TODO - Replace with MongoDB query
+        "This route returns all the food inside the fridge 🍔"
     }
 }
