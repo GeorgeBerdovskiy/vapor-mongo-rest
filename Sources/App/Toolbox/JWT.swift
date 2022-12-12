@@ -44,3 +44,18 @@ func signedToken(claims: TokenClaims) -> String {
         return ""
     }
 }
+
+// Access private key from system
+let pathPublic = URL(fileURLWithPath: "secret.key.pub")
+
+func verifyJWT(token: String) -> Bool {
+    do {
+        let key: Data = try Data(contentsOf: pathPublic, options: .alwaysMapped)
+        let verifier = JWTVerifier.rs256(publicKey: key)
+        let verified = JWT<TokenClaims>.verify(token, using: verifier)
+        
+        return verified
+    } catch {
+        return false
+    }
+}

@@ -16,4 +16,4 @@
 You're all set! Visit your server at `127.0.0.1:8080`.
 
 ### Generate Private Key for JWT Signing
-In this repository, run the command `ssh-keygen -t rsa -b 4096 -m PEM -f secret.key` to generate a private key for the JWT signing algorithm
+In this repository, run the commands `ssh-keygen -t rsa -b 4096 -m PEM -f secret.key` and `openssl rsa -in secret.key -pubout -outform PEM -out secret.key.pub` to generate private and public key for the JWT signing algorithm

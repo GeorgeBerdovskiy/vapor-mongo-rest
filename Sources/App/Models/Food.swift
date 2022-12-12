@@ -14,7 +14,11 @@ struct Food: Content {
     let type: FoodType
 }
 
+struct FoodUpdate: Content {
+    var name: String?
+    var type: String?
+}
+
 struct DeleteQuery: Content {
     var id: String?
 }
-

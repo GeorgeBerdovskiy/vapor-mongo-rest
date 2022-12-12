@@ -24,7 +24,7 @@ public func configure(_ app: Application) throws {
     app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
 
     // Initialize client using the application's 'EventLoopGroup'
-    let client = try MongoClient("mongodb://localhost:27017", using: app.eventLoopGroup)
+    let client = try MongoClient(Environment.get("MONGO_URI") ?? "mongodb://localhost:27017", using: app.eventLoopGroup)
     app.mongoClient = client
     
     // Register routes
