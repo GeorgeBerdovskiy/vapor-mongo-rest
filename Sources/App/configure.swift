@@ -1,12 +1,32 @@
 import Vapor
-import MongoSwiftSync
+import MongoSwift
 
-// configures your application
+extension Application {
+    // Global MongoDB client that will be used throughout the application
+    public var mongoClient: MongoClient {
+        get {
+            self.storage[MongoClientKey.self]!
+        }
+        
+        set {
+            self.storage[MongoClientKey.self] = newValue
+        }
+    }
+
+    private struct MongoClientKey: StorageKey {
+        typealias Value = MongoClient
+    }
+}
+
+// Configures your application
 public func configure(_ app: Application) throws {
-    // uncomment to serve files from /Public folder
-    // app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
+    // Serve files from /Public folder
+    app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
 
-    // register routes
-    let mongo = try MongoClient("mongodb://localhost:27017")
+    // Initialize client using the application's 'EventLoopGroup'
+    let client = try MongoClient("mongodb://localhost:27017", using: app.eventLoopGroup)
+    app.mongoClient = client
+    
+    // Register routes
     try routes(app)
 }
