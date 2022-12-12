@@ -14,3 +14,6 @@
 3. Alternatively, open the project in Xcode and press the "play" button every time you need to rebuild with new changes 
 
 You're all set! Visit your server at `127.0.0.1:8080`.
+
+### Generate Private Key for JWT Signing
+In this repository, run the command `ssh-keygen -t rsa -b 4096 -m PEM -f secret.key` to generate a private key for the JWT signing algorithm

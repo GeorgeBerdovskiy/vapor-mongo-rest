@@ -13,3 +13,8 @@ struct Food: Content {
     let name: String
     let type: FoodType
 }
+
+struct DeleteQuery: Content {
+    var id: String?
+}
+
